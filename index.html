@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DV-WIN AI Hack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-content">
+            <h1>Welcome To DV-WIN AI Hack!</h1>
+            <div class="notice">
+                <span class="icon">⭕</span> Important Notice <span class="icon">⭕</span>
+                <p>This hack system will only work when you deposit a minimum of ₹500 from this system!</p>
+            </div>
+            <button id="activate-hack-btn">Active Hack</button>
+        </div>
+    </div>
+
+    <!-- Payment Screen -->
+    <div id="payment-screen" class="screen">
+        <div class="payment-content">
+            <div class="notice-toast">
+                <span class="icon">📢</span> Important Notice (Read This) <span class="icon">🔊</span>
+                <p>This hack system will only work when you deposit a minimum of ₹500 from this system!</p>
+            </div>
+
+            <button id="submit-utr-bubble-btn" class="bubble-button">Submit UTR No</button>
+
+            <div id="utr-details-form" class="hidden">
+                <input type="text" id="utr-input" placeholder="Enter UTR No or Trx ID (12 digit)">
+
+                <!-- Screenshot Upload Area -->
+                <div class="file-upload-area">
+                    <label for="screenshot-upload" class="upload-label">Select Payment Screenshot</label>
+                    <input type="file" id="screenshot-upload" accept="image/*">
+                    <span id="file-name">No file chosen</span>
+                </div>
+
+                <input type="text" id="game-id-input" placeholder="Enter Game ID">
+                <button id="submit-payment-btn">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+  </html>
